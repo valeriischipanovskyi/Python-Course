@@ -26,7 +26,7 @@ while True:
 
     elif choice == "Read":
         def read_phone_book():
-            print(phone_book)
+            print (phone_book.get(input("")))
     elif choice == "Update":
         def update_phone_book():
             phone_book.update(input(''))
