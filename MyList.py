@@ -13,4 +13,6 @@ class MyList():
        if index == Ellipsis:
            return self._l.copy()
        return self._l[index]
-    
+    def __iter__(self):
+        print('Iter')
+        return iter(self._l)
