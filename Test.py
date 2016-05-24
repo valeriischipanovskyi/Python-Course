@@ -4,6 +4,8 @@ Read
 Update
 Delete
 """
+with open('phone_book.txt', 'rt') as f:
+    s = f.read()
 phone_book = {}
 
 
@@ -15,7 +17,8 @@ def create_phone_book():
             name = input("Enter name user: ")
             phone_number = input("Enter phone number: ")
             if name and phone_number:
-                phone_book[name] = phone_number
+                with open('phone_book.txt', 'wt') as f:
+                    f.write("{} []\n".format('name', phone_number))
             else:
                 continue
         elif add == "Exit":
@@ -28,7 +31,9 @@ def read_phone_book():
             add = input()
             if add == "Start":
                 try:
-                    print(phone_book[input('')])
+                    with open('phone_book.txt', 'rt') as f:
+                        for i in f:
+                          print(i[input('')])
                 except ValueError:
                     print("Not Search User name")
                     continue
@@ -37,18 +42,24 @@ def read_phone_book():
 
 
 def update_phone_book():
-    print(phone_book)
-    phone_book.update(input(''))
+    with open('phone_book.txt', 'rt') as f:
+        for i in f:
+            print(i[input('')])
+    i.update(input(''))
 
 
 def delete_user_phone():
     print("Choice del element:")
-    if phone_book['']:
-        del phone_book[input('')]
-    elif print(phone_book):
-        del phone_book[input('')]
+    with open('phone_book.txt', 'rt') as f:
+        for i in f:
+            print(i[input('')])
+    if i['']:
+        del i[input('')]
+    elif print(i):
+        del i[input('')]
     else:
         print(phone_book)
+
 
 while True:
     print("""Make your choice:
