@@ -10,5 +10,7 @@ class MyList():
     def __setitem__(self, index, value):
         self._l[index] = value
     def __getitem__(self, index):
-        return self._l[index]
+       if index == Ellipsis:
+           return self._l.copy()
+       return self._l[index]
     
