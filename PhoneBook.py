@@ -4,11 +4,11 @@ Read
 Update
 Delete
 """
-class PhoneBook:
+import PhoneBoocAbc
+
+class PhoneBook(PhoneBoocAbc.PhoneBookAbc):
     PHONE_BOOK_FILE = 'phone_book.txt'
 
-    def __init__(self):
-        self.phone_book = {}
     def __iter__(self):
         for name, phone_number in self.phone_book.items():
             yield name, phone_number
@@ -82,12 +82,11 @@ while True:
     3. Update
     4. Delete""")
     choice = input("")
-    Book.choice_menu = {'Create': Book.create_phone_book, 'Read': Book.read_phone_book, 'Update': Book.update_phone_book, 'Delete': Book.delete_user_phone}
+    Book.choice_menu = {'Create': Book.create_phone_book,
+                        'Read': Book.read_phone_book,
+                        'Update': Book.update_phone_book,
+                        'Delete': Book.delete_user_phone}
     if choice not in Book.choice_menu.keys():
         print("Enter you choice")
     else:
         Book.choice_menu[choice]()
-
-
-
-
