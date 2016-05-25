@@ -9,7 +9,9 @@ class PhoneBook:
 
     def __init__(self):
         self.phone_book = {}
-
+    def __iter__(self):
+        for name, phone_number in self.phone_book.items():
+            yield name, phone_number
 
     def load_dictionary(self):
         self.phone_book.clear()
@@ -85,7 +87,7 @@ while True:
         print("Enter you choice")
     else:
         Book.choice_menu[choice]()
-        continue
-        
+
+
 
 
