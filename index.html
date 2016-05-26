@@ -7,7 +7,15 @@
 <body>
 {% block content %}
     <h1>Hello</h1>
-    <a href="/add">Add</a>
+    {% if mesage %}
+    <p>{{mesage}}</p>
+    {% endif %}
+    <a href="/add">add</a>
+<ul>
+    {% for contacts in contacts %}
+        <li>{{contact.0}} &mdash; {{contact.1}}</li>
+    {% end for%}
+</ul>
 {% endblock %}
 </body>
 </html>
