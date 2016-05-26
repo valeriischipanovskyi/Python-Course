@@ -9,10 +9,13 @@ def b_r():
 
 @app.route('/')
 def index():
-    name = g.r.keys('phone:*')
-    contacts = [(name[6:], g.r.get(name)) for name in name]
+    names = g.r.keys('phone:*')
+    contacts = [(name[6:].decode('utf8'), g.r.get(name).decode('utf8')) for name in names]
     print(contacts)
-    return render_template('Index.html', message=session.pop('message'), contacts)
+    return render_template('Index.html',
+                           message=session.pop('message'),
+                           contacts=contacts
+                           )
 
 @app.route('/<add>', methods=['GET', 'POST'])
 def add():
