@@ -93,42 +93,45 @@ while True:
 
 class PhoneBookDB(PhoneBookAbc):
 
+    conn = sqlite3.connect('dbphone.sqlite')
+    
     def __iter__(self):
         for name, phone_number in self.phone_book.items():
             yield name, phone_number
 
-conn = sqlite3.connect('dbphone.sqlite')
+
 
     def create_table(self):
-        cursor = conn.cursor()
+        cursor = self.conn.cursor()
         cursor.execute('CREATE TABLE dbphone("name varchar(30)", "phone_number varchar(20)"')
-        conn.commit()
+        self.conn.commit()
 
 
     def create_phone_book(self, name, phone_number):
         val_str = "'{}', '{}'".format(name, phone_number)
         sql_str = "INSERT INTO phone_book (name, Phone_number) VALUES ({});".format(val_str)
-        conn.execute(sql_str)
-        conn.commit()
-        return conn.total_changes
+        self.conn.execute(sql_str)
+        self.conn.commit()
+        return self.conn.total_changes
 
     def read_phone_book(self):
         sql_str = "SELECT * from PHONE_BOOK"
-        cursor = conn.execute(sql_str)
+        cursor = self.conn.execute(sql_str)
         rows = cursor.fetchall()
         return rows
 
-    def update_phone_book(name, phone_number):
+    def update_phone_book(self, name, phone_number):
         val_str = "name='{}', Phone Number={}".format(name, phone_number)
         sql_str = "Update Phone Book set {} where name= ;".format(val_str)
-        conn.execute(sql_str)
-        conn.commit()
-        return conn.total_changes
+        self.conn.execute(sql_str)
+        self.conn.commit()
+        return self.conn.total_changes
 
     def delete_user_phone(self, change_name):
         sql_str = "DELETE from PHONE_BOOK where Name={}".format(change_name)
-        conn.execute(sql_str)
-        conn.commit()
-        return conn.total_changes
+        self.conn.execute(sql_str)
+        self.conn.commit()
+        return self.conn.total_changes
 
-create_table()
+Create = PhoneBookDB()
+# create_table()
