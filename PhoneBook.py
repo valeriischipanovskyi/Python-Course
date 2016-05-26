@@ -4,15 +4,20 @@ Read
 Update
 Delete
 """
-import sqlite3
 
-class PhoneBook:
+import PhoneBookAbc
+
+
+class PhoneBook(PhoneBookAbc.PhoneBookAbc):
     PHONE_BOOK_FILE = 'phone_book.txt'
-    PHONE_BOOK_DB = 'dbphone.sqlite'
+
+    def __init__(self):
+        self.phone_book = {}
 
     def __iter__(self):
         for name, phone_number in self.phone_book.items():
             yield name, phone_number
+
 
     def load_dictionary(self):
         self.phone_book.clear()
@@ -23,9 +28,6 @@ class PhoneBook:
             self.phone_book[name] = phone_number
         file.close()
 
-    def create_book(self):
-        pass
-    
     def create_phone_book(self):
         while True:
             if "Start":
@@ -93,15 +95,3 @@ while True:
     else:
         Book.choice_menu[choice]()
 
-
-class PhoneBookDb:
-    def connect_db(self):
-        conn = sqlite3.connect('dbphone.sqlite')
-        cursor = conn.cursor()
-        cursor.execute('Create table dbphone(name varchar(30), phone_number varchar(20)')
-        conn.commit()
-        cursor.execute('INSERT INTO  dbphone(name, phone_number) VALUES("Bob", "063-741-37-82")')
-        conn.commit()
-        cursor.execute('SELECT * FROM dbphone')
-        print(cursor.fetchall())
-        conn.close()
